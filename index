@@ -229,7 +229,7 @@
 					<c:forEach var="reviewdata" items="${reviewlist }">
 						<tr>
 
-							<td style="font-weight:bold; border-bottom:3px solid #CEA73D">${startNum+1}</td>
+							<td style="font-size:2em; font-weight:bold; border-bottom:3px solid #CEA73D; color:#CEA73D">${startNum+1}</td>
 							<td>${reviewdata.review.movie.mv_title }</td>
 							<td><a
 								href="reviewread.do?rv_num=${reviewdata.review.rv_num }"> <c:out

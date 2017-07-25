@@ -4,71 +4,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/MainBasic.css">
+<link rel="stylesheet" href="css/NewBasic.css">
+
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script src="js/slides.min.jquery.js"></script>
-<title>아이디 찾기 성공</title>
-
-<style>
-/* NewBasic.css */
-
-/* end NewBasic.css */
-
-.form-container {
-	
-    font-size: 18px;  /* 글자 크기 */
-    padding: 25px; 
-				margin: auto; /* 큰 박스 센터 */
-				width: 400px;
-				border: 0;
-				background-color: #fdeef4;  /* 진주 배경색*/
-				border-radius: 3px;  /* 테두리 둥글게 */
-				margin-top: 150px;  
-				color:#670000;  /* 레드색 글자 */
-}
-a {
-   color: #FEFCFF;  /* 유백색 글자  */
-    font-size: 18px;  /* 글자 크기 */
- }
-
-a:hover, a:focus, a:visited, a:link { /* a링크 액션별로*/
-	text-decoration: none;
-	color: #FEFCFF;  /* 유백색 글자  */
-}
-</style>
-
+<title>Insert title here</title>
 </head>
 <body>
 <div id="wrapper">
 		<header> <jsp:include page="header.jsp"></jsp:include>
 		</header>
-		<section>
 		<article>
-		
-		
-		<form class="form-container">
-		<div class="eddy">
-				
+		<section>
 
-<p align="center"  >
-	<span><strong>아이디 * : ${member.m_id }</strong></span>
-</p>
-</div>
-</form>
-<p align="center"  >
-<a href="login.do"><strong>[로그인하기]</strong></a>
-<a href="searchPw.do"><strong>[비밀번호 찾기]</strong></a>
-</p>
 
-		
+<p>
+	아이디: ${member.m_id }
+</p>
+<a href="login.do">[로그인하기]</a>
+<a href="searchPw.do">[비밀번호 찾기]</a>
+	
+
+		</section>
 		</article>
 
 		<footer>
 			<jsp:include page="footer.jsp"></jsp:include>
 		</footer>
-		</section>
 	</div>
 </body>
 </html>

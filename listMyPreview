@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/Basic_myPage.css?ver=1">
-<link rel="stylesheet" href="css/ListMyPreview.css?ver=2">
+<link rel="stylesheet" href="css/ListMyPreview.css?ver=3.1">
 
 
 <script
@@ -49,13 +49,13 @@
          </ul>
       </sidebar>
       <article>
-
+			<h1>내 기대평</h1>
          <!-- <section> -->
             <table border="0" class="listMyPreview_table">
 
 			<thead>
                <tr>
-                  <th width="60px">기대평<br>번호</th>
+                  <th width="60px">번호</th>
                   <th>영화</th>
                   <th>내용</th>
                   <th>작성일</th>

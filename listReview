@@ -8,30 +8,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/NewBasic.css">
 <link rel="stylesheet" href="css/listReview.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="../../js/slides.min.jquery.js"></script>
 <script>
-	/* 
-	 function searchCheck(frm) {
-	 //검색
-	 var KeyValue = frm.keyWord.value;
+/* 
+function searchCheck(frm) {
+	//검색
+	var KeyValue = frm.keyWord.value;
 	
 	
-	 if ($.trim(KeyValue) == "") {
-	 alert("검색 단어를 입력하세요.");
-	 $('#wordbox').val('');
-	 frm.keyWord.focus();
-	 false;
-	 }
+	if ($.trim(KeyValue) == "") {
+		alert("검색 단어를 입력하세요.");
+		$('#wordbox').val('');
+		frm.keyWord.focus();
+		false;
+	}
 
-	 frm.submit();
+	frm.submit();
 
-	 }  */
+}  */
 	function searchCheck(frm) {
 		//검색
 		var KeyValue = frm.keyWord.value;
-
+		
+		
 		if ($.trim(KeyValue) == "") {
 			/* alert("검색 단어를 입력하세요."); */
 			$('#wordbox').val('');
@@ -41,7 +43,7 @@
 
 		frm.submit();
 
-	}
+	}  
 </script>
 
 
@@ -55,32 +57,31 @@
 		<article>
 			<section>
 				<table class="board-box">
-					<div class="searchBox">
-						<div class="box1">
-							<form action="reviewsearch.do" method="get" name="search">
-								<input type="hidden" name="reviewSort" value="${reviewSort}">
-								<select name="keyField">
-									<option value="total"
-										<c:if test="${keyField eq 'total'}">selected="selected"</c:if>>감상평제목+내용</option>
-									<option value="mv_title"
-										<c:if test="${keyField eq 'mv_title'}">selected="selected"</c:if>>영화제목</option>
-									<option value="rv_title"
-										<c:if test="${keyField eq 'rv_title'}">selected="selected"</c:if>>게시글제목</option>
-									<option value="rv_m_id"
-										<c:if test="${keyField eq 'rv_m_id'}">selected="selected"</c:if>>작성자(아이디)</option>
-								</select> <input type="text" id="wordbox" class="suggest" name="keyWord"
-									value="${param.keyWord}" /> <input type="button" value="검색"
-									class="searchBtn" onclick="searchCheck(form)" />
-
-
-							</form>
-						</div>
-					</div>
 					<thead>
-
-
 						<tr>
-							<td colspan="4" class="write"><a href="reviewwrite.do?no=1">[게시글쓰기]</a></td>
+							<td colspan="6" class="write">
+								<a href="reviewwrite.do?no=1">[게시글쓰기]</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center" class="searchBox">
+								<form action="reviewsearch.do" method="get" name="search">
+									<input type="hidden" name="reviewSort" value="${reviewSort}">
+									<select name="keyField">
+										<option value="total"
+											<c:if test="${keyField eq 'total'}">selected="selected"</c:if>>감상평제목+내용</option>
+										<option value="mv_title"
+											<c:if test="${keyField eq 'mv_title'}">selected="selected"</c:if>>영화제목</option>
+										<option value="rv_title"
+											<c:if test="${keyField eq 'rv_title'}">selected="selected"</c:if>>게시글제목</option>
+										<option value="rv_m_id"
+											<c:if test="${keyField eq 'rv_m_id'}">selected="selected"</c:if>>작성자(아이디)</option>
+									</select> 
+									<input type="text" id="wordbox" class="suggest" name="keyWord"
+										value="${param.keyWord}" /> 
+									<input type="button" value="검색" class="searchBtn" onclick="searchCheck(form)" />
+								</form>
+							</td>
 							<td colspan="2">
 								<form action="reviewlist.do" method="get">
 									<select name="reviewSort" class="sort">
@@ -88,14 +89,14 @@
 											<c:if test="${reviewSort eq 'rv_num'}">selected="selected"</c:if>>최근등록순</option>
 										<option value="rv_readcnt"
 											<c:if test="${reviewSort eq 'rv_readcnt'}">selected="selected"</c:if>>최다조회순</option>
-									</select> <input type="submit" value="GO" class="goBtn" />
+									</select> 
+									<input type="submit" value="GO" class="goBtn"/>
 								</form>
 							</td>
 						</tr>
 					<thead>
 
 						<tr class="header">
-							<!-- <td>게시글목록번호</td> -->
 							<th>No.</th>
 							<th>영화</th>
 							<th>제목</th>
@@ -138,7 +139,8 @@
 									</c:forEach> <c:if test="${reviewPage.endPage < reviewPage.totalPages }">
 										<a
 											href="reviewlist.do?pageNo=${reviewPage.startPage + 5 }&reviewSort=${reviewSort}">[다음]</a>
-									</c:if></td>
+									</c:if>
+								</td>
 							</tr>
 						</c:if>
 					</tfoot>

@@ -7,9 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/NewBasic.css">
+<link rel="stylesheet" href="css/blankSearch.css?ver=1">
+
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="../../js/slides.min.jquery.js"></script>
+
 <style type="text/css">
 .list a:visited, .list a:link {
 	text-decoration: none;
@@ -48,22 +51,13 @@
 		</header>
 		<article>
 			<section class="list">
-
-
-				<form action="reviewsearch.do" method="get">
-					<input type="hidden" name="keyField" value="${keyField}"> <input
-						type="hidden" name="keyWord" value="${keyWord}"> <select
-						name="reviewSort">
-						<option value="rv_num"
-							<c:if test="${reviewSort eq 'rv_num'}">selected="selected"</c:if>>최근등록순</option>
-						<option value="rv_readcnt"
-							<c:if test="${reviewSort eq 'rv_readcnt'}">selected="selected"</c:if>>최다조회순</option>
-					</select> <input type="submit" value="GO" />
-				</form>
+			<table class="board-box">
+				<div class="searchBox">
+					<div class="box1">
 				<form action="reviewsearch.do">
 					<input type="hidden" name="reviewSort" value="${reviewSort}">
 
-					<select name="keyField"<%-- value="${param.keyField}" --%>>
+					<select name="keyField">
 						<option value="total"
 							<c:if test="${keyField eq 'total'}">selected="selected"</c:if>>감상평제목+내용</option>
 						<option value="mv_title"
@@ -72,16 +66,18 @@
 							<c:if test="${keyField eq 'rv_title'}">selected="selected"</c:if>>게시글제목</option>
 						<option value="rv_m_id"
 							<c:if test="${keyField eq 'rv_m_id'}">selected="selected"</c:if>>작성자(아이디)</option>
-					</select> <input type="text" id="wordbox" name="keyWord"
-						value="${param.keyWord}" /> listSearchReview<br>
-					<input type="button"  value="검색" onclick="searchCheck(form)"/>
+					</select> <input type="text" id="wordbox" class="suggest" name="keyWord" value="${param.keyWord}" />
+					<input type="button"  value="검색" class="searchBtn" onclick="searchCheck(form)"/>
 				</form>
-					<!-- onclick="return searchCheck(form)" -->
-					<br>"${keyWord}"에 대한 검색 결과입니다. <br>
-					<p>단어의 철자가 정확한지 확인해 보세요. <br>
+					<div class="message">
+					"${keyWord}"에 대한 검색 결과입니다.
+					<p>단어의 철자가 정확한지 확인해 보세요.</p>
 					한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요. <br>
-					검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.</p>
-				
+					검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.
+				</div>
+				</div>
+				</div>
+				</table>
 			</section>
 		</article>
 

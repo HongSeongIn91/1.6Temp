@@ -9,7 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/NewBasic.css">
-<link rel="stylesheet" href="css/readReview.css?ver=1">
 
 
 <script
@@ -63,16 +62,6 @@
 			return false;
 		}
 	}
-
-	/* 글자수 제한  */
-	$(function() {
-		$('#wordbox').keyup(function(e) {
-			var content = $(this).val();
-			$(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
-			$('#counter').html(content.length + '/300');
-		});
-		$('#wordbox').keyup();
-	});
 </script>
 <title>검색된 게시글 읽기</title>
 </head>
@@ -87,199 +76,170 @@
 		</header>
 		<article>
 			<section>
-				<div id="Content">
-					<table class="roundTable">
-						<tbody class="pos_rel">
-							<tr class="pos_rel">
-								<td class="">
-									<div class="rv_edit">
-										<c:if
-											test="${authUser.id == searchReviewData.review.rv_m_id }">
-											<span> <a
-												href="reviewmodify.do?rv_num=${searchReviewData.review.rv_num }&pageNo=${pageNo }&reviewSort=${reviewSort} }">[수정]
-											</a>
-											</span>
-											<span class="bar">|</span>
-											<span> <a
-												href="reviewdelete.do?rv_num=${searchReviewData.review.rv_num }&pageNo=${pageNo }&reviewSort=${reviewSort} }">[삭제]
-											</a>
-											</span>
-											<span class="bar">|</span>
-										</c:if>
-										<span> <c:set var="pageNo"
-												value="${empty param.pageNo ? '1' : param.pageNo }"></c:set>
-											<a
-											href="reviewsearch.do?pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}&reviewSort=${reviewSort}">[목록]
+
+				<table border="1" width="100%">
+
+					<tr>
+						<td>번호</td>
+						<td>${searchReviewData.review.rv_num }</td>
+					</tr>
+
+
+
+					<tr>
+						<td>작성자</td>
+						<td><c:out value="${searchReviewData.review.rv_m_id }"></c:out></td>
+					</tr>
+
+					<tr>
+						<td>조회수</td>
+						<td><c:out value="${searchReviewData.review.rv_readcnt }"></c:out></td>
+					</tr>
+					<tr>
+						<td>작성일</td>
+
+						<td><fmt:formatDate
+								value="${searchReviewData.review.rv_regdate }"
+								pattern="yyyy/MM/dd hh:mm:ss" /></td>
+					</tr>
+
+					<tr>
+						<td>본영화</td>
+						<td><c:out value="${searchReviewData.review.rv_mv_num }"></c:out></td>
+					</tr>
+
+					<tr>
+						<td>본영화제목</td>
+						<td><c:out value="${searchReviewData.review.movie.mv_title }"></c:out></td>
+					</tr>
+					<tr>
+						<td>제목</td>
+						<td><c:out value="${searchReviewData.review.rv_title }"></c:out></td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td><u:pre value='${searchReviewData.content }' /></td>
+					</tr>
+
+					<tr>
+						<td colspan="2"><c:set var="pageNo"
+								value="${empty param.pageNo ? '1' : param.pageNo }"></c:set> <a
+							href="reviewsearch.do?pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}&reviewSort=${reviewSort}">[목록]</a>
+							<c:if test="${authUser.id == searchReviewData.review.rv_m_id }">
+								<a
+									href="reviewmodify.do?rv_num=${searchReviewData.review.rv_num }&pageNo=${pageNo }&reviewSort=${reviewSort}">[게시글
+									수정]</a>
+								<a
+									href="reviewdelete.do?rv_num=${searchReviewData.review.rv_num }&pageNo=${pageNo }&reviewSort=${reviewSort}"
+									onclick="return reviewdelchk()">[게시글 삭제]</a>
+							</c:if></td>
+					</tr>
+				</table>
+				<!-- 댓글 목록-->
+				<table border="1">
+					<tr>
+						<td colspan="3">댓글 목록</td>
+					</tr>
+
+					<c:forEach var="reply" items="${replyPage.content}">
+						<tr>
+							<!-- 아이디, 작성일 -->
+							<td>
+								<div>
+									아이디 : ${reply.rp_m_id}<br> 작성일 :
+									<fmt:formatDate value="${reply.rp_regdate}" pattern="yy/MM/dd"></fmt:formatDate>
+								</div>
+							</td>
+
+							<!-- 댓글 내용 -->
+							<td>
+								<div>
+									<u:pre value='${reply.rp_content}' />
+								</div>
+
+							</td>
+							<!-- 버튼 -->
+							<c:if test="${authUser.id == reply.rp_m_id}">
+								<td>
+									<div>
+										<a
+											href="reviewsearchmodifyReply.do?rp_num=${reply.rp_num}&rp_rv_num=${searchReviewData.review.rv_num }&replypageNo=${replyPage.currentPage}&reviewSort=${reviewSort}&pageNo=${pageNo}&keyField=${keyField}&keyWord=${keyWord}">
+											<input type="button" value="수정">
+
 										</a>
-										</span>
-									</div>
-									<div class="rv_subject">
-										<div class="subject">
-											<span> <c:out
-													value="${searchReviewData.review.rv_title }"></c:out>
-											</span> <span class="bar">|</span> <span> <c:out
-													value="${searchReviewData.review.movie.mv_title }"></c:out>
-											</span>
-										</div>
-									</div>
-									<div class=tit-box>
-										<div class="rv_writer">
-											<span> <c:out
-													value="${searchReviewData.review.rv_m_id }"></c:out>
-											</span> <span class="bar">|</span> <span class="rp_date"> <fmt:formatDate
-													value="${searchReviewData.review.rv_regdate }"
-													pattern="yyyy/MM/dd hh:mm" />
-											</span>
-										</div>
+										<p>
 
-
-
-
-
-
-
-									</div>
-									<div class="rv_contents" id="rv_content"></div>
-									<div class="rv_content_inbox">
-										<table class="protectTable" id="protectTable">
-											<tbody>
-												<tr>
-													<td><u:pre value='${searchReviewData.content }' /></td>
-												</tr>
-											</tbody>
-										</table>
-										<table class="clearTable">
-											<tbody>
-												<tr>
-													<td></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div class="reply">댓글</div>
-									<div class="replyBox" id="replyArea">
-
-										<c:forEach var="reply" items="${replyPage.content}">
-											<div class="replyDiv" id="replyDiv">
-												<div class="reply_item_list">
-													<div>
-														<div class="rp_nickname">
-															<span>${reply.rp_m_id}</span> <span class="rp_date">
-																<fmt:formatDate value="${reply.rp_regdate}"
-																	pattern="yy/MM/dd"></fmt:formatDate>
-															</span>
-														</div>
-														<div class="rp_edit">
-															<!-- 버튼 -->
-															<c:if test="${authUser.id == reply.rp_m_id}">
-																<a href="reviewsearchmodifyReply.do?rp_num=${reply.rp_num}&rp_rv_num=${searchReviewData.review.rv_num }&replypageNo=${replyPage.currentPage}&reviewSort=${reviewSort}&pageNo=${pageNo}&keyField=${keyField}&keyWord=${keyWord}">
-																수정</a>
-
-																
-																<a
-																	href="reviewsearchdeleteReply.do?rp_num=${reply.rp_num}&rp_rv_num=${searchReviewData.review.rv_num }&replypageNo=${replyPage.currentPage}&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}"
-																	onclick="return delchk()"> 
-																삭제
-																</a>
-
-
-															</c:if>
-														</div>
-													</div>
-													<!-- 댓글 내용 -->
-
-													<div class="rp_content">
-														<span><u:pre value='${reply.rp_content}' /></span>
-													</div>
-												</div>
-												<div class="dotline"></div>
-											</div>
-										</c:forEach>
-										<div class="rp_paging">
-											<c:if test="${replyPage.hasReplies() }">
-												<span class="num_Prev"> <c:if
-														test="${replyPage.startPage > 5}">
-														<a
-															href="reviewsearchlistReply.do?replypageNo=${replyPage.startPage - 5}&rv_num=${searchReviewData.review.rv_num  }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[이전]
-														</a>
-													</c:if>
-												</span>
-												<c:forEach var="pNo" begin="${replyPage.startPage }"
-													end="${replyPage.endPage }">
-													<a
-														href="reviewsearchlistReply.do?replypageNo=${pNo}&rv_num=${searchReviewData.review.rv_num }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[${pNo }]</a>
-												</c:forEach>
-												<span class="num_next"> <c:if
-														test="${replyPage.endPage < replyPage.totalPages }">
-														<a
-															href="reviewsearchlistReply.do?replypageNo=${replyPage.startPage + 5}&rv_num=${searchReviewData.review.rv_num  }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[다음]</a>
-													</c:if>
-												</span>
-
-											</c:if>
-										</div>
-
-										<!-- 댓글쓰기 폼 -->
-										<c:if test="${! empty authUser}">
-
-											<form action="reviewsearchwriteReply.do">
-												<div class="rpWrite">
-													<div class="reply_editor_layout">
-														<table class="rpInput" border="1">
-															<tbody>
-																<tr>
-																	<td class="reply_input">
-																		<div class="reply_wrap">
-																			<div class="reply_area">
-
-																				<textarea name="content" id="wordbox" cols="56"
-																					rows="3" maxlength="300"></textarea>
-																				<input type="button" value="등록"
-																					onclick="writeCheck(form)" class="submit">
-																				<!-- 게시글번호 -->
-																				<input type="hidden" name="rp_rv_num"
-																					value="${searchReviewData.review.rv_num }"><br>
-																				<!-- 소팅 -->
-																				<input type="hidden" name="reviewSort"
-																					value="${reviewSort}"><br>
-																				<!-- 현재페이지번호 -->
-																				<input type="hidden" name="pageNo"
-																					value="${pageNo }"><br> <input
-																					type="hidden" name="keyField" value="${keyField }"><br>
-																				<input type="hidden" name="keyWord"
-																					value="${keyWord }"><br>
-																				<!-- 리플페이지번호 -->
-																				<input type="hidden" name="replyEndPage"
-																					value="${replyPage.endPage}"> <input
-																					type="hidden" name="TOKEN_KEY"
-																					value="<%=request.getAttribute("TOKEN_KEY")%>" />
-																				
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-
-											</form>
-										</c:if>
+											<a
+												href="reviewsearchdeleteReply.do?rp_num=${reply.rp_num}&rp_rv_num=${searchReviewData.review.rv_num }&replypageNo=${replyPage.currentPage}&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}"
+												onclick="return delchk()"><input type="button"
+												value="삭제"> </a>
 									</div>
 								</td>
-							</tr>
-						</tbody>
-					</table>
+							</c:if>
+						</tr>
 
-				</div>
+
+					</c:forEach>
+					<c:if test="${replyPage.hasReplies() }">
+						<tr>
+							<td colspan="4"><c:if test="${replyPage.startPage > 5}">
+									<a
+										href="reviewsearchlistReply.do?replypageNo=${replyPage.startPage - 5}&rv_num=${searchReviewData.review.rv_num  }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[이전]
+									</a>
+								</c:if> <c:forEach var="pNo" begin="${replyPage.startPage }"
+									end="${replyPage.endPage }">
+									<a
+										href="reviewsearchlistReply.do?replypageNo=${pNo}&rv_num=${searchReviewData.review.rv_num }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[${pNo }]</a>
+								</c:forEach> <c:if test="${replyPage.endPage < replyPage.totalPages }">
+									<a
+										href="reviewsearchlistReply.do?replypageNo=${replyPage.startPage + 5}&rv_num=${searchReviewData.review.rv_num  }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[다음]</a>
+								</c:if></td>
+						</tr>
+					</c:if>
+				</table>
+				<!-- 댓글쓰기 폼 -->
+				<c:if test="${! empty authUser}">
+					<table border="1">
+						<tr>
+							<td>댓글 쓰기</td>
+						</tr>
+						<tr>
+							<td>
+
+								<form action="reviewsearchwriteReply.do">
+									<textarea name="content" id="wordbox" cols="50" rows="3"></textarea>
+									<br>
+									<!-- 게시글번호 -->
+									<input type="hidden" name="rp_rv_num"
+										value="${searchReviewData.review.rv_num }"><br>
+									<!-- 소팅 -->
+									<input type="hidden" name="reviewSort" value="${reviewSort}"><br>
+									<!-- 현재페이지번호 -->
+									<input type="hidden" name="pageNo" value="${pageNo }"><br>
+
+									<input type="hidden" name="keyField" value="${keyField }"><br>
+									<input type="hidden" name="keyWord" value="${keyWord }"><br>
+									<!-- 리플페이지번호 -->
+									<input type="hidden" name="replyEndPage"
+										value="${replyPage.endPage}"> <input type="hidden"
+										name="TOKEN_KEY"
+										value="<%=request.getAttribute("TOKEN_KEY")%>" /> <input
+										type="button" value="댓글 등록" onclick="writeCheck(form)">
+
+								</form> <br>
+							</td>
+						</tr>
+					</table>
+					<!-- 		</form> -->
+				</c:if>
+
 			</section>
 		</article>
+<%-- 
 		<footer>
 			<jsp:include page="footer.jsp"></jsp:include>
-		</footer>
+		</footer> --%>
 	</div>
-
-
 
 </body>
 </html>

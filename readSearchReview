@@ -1,0 +1,285 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="util.Token"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/NewBasic.css">
+<link rel="stylesheet" href="css/readReview.css?ver=1">
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="js/slides.min.jquery.js"></script>
+<script language='javascript'>
+	function noEvent() {
+		if (event.keyCode == 116) {
+			event.keyCode = 2;
+			return false;
+		} else if (event.ctrlKey
+				&& (event.keyCode == 78 || event.keyCode == 82)) {
+			return false;
+		}
+	}
+	document.onkeydown = noEvent;
+
+	function writeCheck(frm) {
+		//검색
+		var Value = frm.content.value;
+
+		if ($.trim(Value) == "") {
+			alert("등록할 댓글을 입력하세요.");
+			$('#wordbox').val('');
+			frm.keyWord.focus();
+			return;
+		}
+		frm.submit();
+	}
+
+	function delchk() {
+		var check = confirm("댓글을 삭제하시겠습니까?");
+		//return false, true;
+		if (check) {
+			alert("댓글이 삭제되었습니다.");
+			return true;
+		} else {
+			alert("댓글 삭제가 취소되었습니다.");
+			return false;
+		}
+	}
+
+	function reviewdelchk() {
+		var check = confirm("현재 게시글을 삭제하시겠습니까?");
+		//return false, true;
+		if (check) {
+			alert("게시글이 삭제되었습니다.");
+			return true;
+		} else {
+			alert("게시글 삭제가 취소되었습니다.");
+			return false;
+		}
+	}
+
+	/* 글자수 제한  */
+	$(function() {
+		$('#wordbox').keyup(function(e) {
+			var content = $(this).val();
+			$(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+			$('#counter').html(content.length + '/300');
+		});
+		$('#wordbox').keyup();
+	});
+</script>
+<title>검색된 게시글 읽기</title>
+</head>
+<body>
+	<%
+		if (request.getAttribute("TOKEN_KEY") == null)
+			Token.set(request);
+	%>
+	<div id="wrapper">
+		<header>
+			<jsp:include page="header.jsp"></jsp:include>
+		</header>
+		<article>
+			<section>
+				<div id="Content">
+					<table class="roundTable">
+						<tbody class="pos_rel">
+							<tr class="pos_rel">
+								<td class="">
+									<div class="rv_edit">
+										<c:if
+											test="${authUser.id == searchReviewData.review.rv_m_id }">
+											<span> <a
+												href="reviewmodify.do?rv_num=${searchReviewData.review.rv_num }&pageNo=${pageNo }&reviewSort=${reviewSort} }">[수정]
+											</a>
+											</span>
+											<span class="bar">|</span>
+											<span> <a
+												href="reviewdelete.do?rv_num=${searchReviewData.review.rv_num }&pageNo=${pageNo }&reviewSort=${reviewSort} }">[삭제]
+											</a>
+											</span>
+											<span class="bar">|</span>
+										</c:if>
+										<span> <c:set var="pageNo"
+												value="${empty param.pageNo ? '1' : param.pageNo }"></c:set>
+											<a
+											href="reviewsearch.do?pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}&reviewSort=${reviewSort}">[목록]
+										</a>
+										</span>
+									</div>
+									<div class="rv_subject">
+										<div class="subject">
+											<span> <c:out
+													value="${searchReviewData.review.rv_title }"></c:out>
+											</span> <span class="bar">|</span> <span> <c:out
+													value="${searchReviewData.review.movie.mv_title }"></c:out>
+											</span>
+										</div>
+									</div>
+									<div class=tit-box>
+										<div class="rv_writer">
+											<span> <c:out
+													value="${searchReviewData.review.rv_m_id }"></c:out>
+											</span> <span class="bar">|</span> <span class="rp_date"> <fmt:formatDate
+													value="${searchReviewData.review.rv_regdate }"
+													pattern="yyyy/MM/dd hh:mm" />
+											</span>
+										</div>
+
+
+
+
+
+
+
+									</div>
+									<div class="rv_contents" id="rv_content"></div>
+									<div class="rv_content_inbox">
+										<table class="protectTable" id="protectTable">
+											<tbody>
+												<tr>
+													<td><u:pre value='${searchReviewData.content }' /></td>
+												</tr>
+											</tbody>
+										</table>
+										<table class="clearTable">
+											<tbody>
+												<tr>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="reply">댓글</div>
+									<div class="replyBox" id="replyArea">
+
+										<c:forEach var="reply" items="${replyPage.content}">
+											<div class="replyDiv" id="replyDiv">
+												<div class="reply_item_list">
+													<div>
+														<div class="rp_nickname">
+															<span>${reply.rp_m_id}</span> <span class="rp_date">
+																<fmt:formatDate value="${reply.rp_regdate}"
+																	pattern="yy/MM/dd"></fmt:formatDate>
+															</span>
+														</div>
+														<div class="rp_edit">
+															<!-- 버튼 -->
+															<c:if test="${authUser.id == reply.rp_m_id}">
+																<a href="reviewsearchmodifyReply.do?rp_num=${reply.rp_num}&rp_rv_num=${searchReviewData.review.rv_num }&replypageNo=${replyPage.currentPage}&reviewSort=${reviewSort}&pageNo=${pageNo}&keyField=${keyField}&keyWord=${keyWord}">
+																수정</a>
+
+																
+																<a
+																	href="reviewsearchdeleteReply.do?rp_num=${reply.rp_num}&rp_rv_num=${searchReviewData.review.rv_num }&replypageNo=${replyPage.currentPage}&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}"
+																	onclick="return delchk()"> 
+																삭제
+																</a>
+
+
+															</c:if>
+														</div>
+													</div>
+													<!-- 댓글 내용 -->
+
+													<div class="rp_content">
+														<span><u:pre value='${reply.rp_content}' /></span>
+													</div>
+												</div>
+												<div class="dotline"></div>
+											</div>
+										</c:forEach>
+										<div class="rp_paging">
+											<c:if test="${replyPage.hasReplies() }">
+												<span class="num_Prev"> <c:if
+														test="${replyPage.startPage > 5}">
+														<a
+															href="reviewsearchlistReply.do?replypageNo=${replyPage.startPage - 5}&rv_num=${searchReviewData.review.rv_num  }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[이전]
+														</a>
+													</c:if>
+												</span>
+												<c:forEach var="pNo" begin="${replyPage.startPage }"
+													end="${replyPage.endPage }">
+													<a
+														href="reviewsearchlistReply.do?replypageNo=${pNo}&rv_num=${searchReviewData.review.rv_num }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[${pNo }]</a>
+												</c:forEach>
+												<span class="num_next"> <c:if
+														test="${replyPage.endPage < replyPage.totalPages }">
+														<a
+															href="reviewsearchlistReply.do?replypageNo=${replyPage.startPage + 5}&rv_num=${searchReviewData.review.rv_num  }&reviewSort=${reviewSort}&pageNo=${pageNo }&keyField=${keyField}&keyWord=${keyWord}">[다음]</a>
+													</c:if>
+												</span>
+
+											</c:if>
+										</div>
+
+										<!-- 댓글쓰기 폼 -->
+										<c:if test="${! empty authUser}">
+
+											<form action="reviewsearchwriteReply.do">
+												<div class="rpWrite">
+													<div class="reply_editor_layout">
+														<table class="rpInput" border="1">
+															<tbody>
+																<tr>
+																	<td class="reply_input">
+																		<div class="reply_wrap">
+																			<div class="reply_area">
+
+																				<textarea name="content" id="wordbox" cols="56"
+																					rows="3" maxlength="300"></textarea>
+																				<input type="button" value="등록"
+																					onclick="writeCheck(form)" class="submit">
+																				<!-- 게시글번호 -->
+																				<input type="hidden" name="rp_rv_num"
+																					value="${searchReviewData.review.rv_num }"><br>
+																				<!-- 소팅 -->
+																				<input type="hidden" name="reviewSort"
+																					value="${reviewSort}"><br>
+																				<!-- 현재페이지번호 -->
+																				<input type="hidden" name="pageNo"
+																					value="${pageNo }"><br> <input
+																					type="hidden" name="keyField" value="${keyField }"><br>
+																				<input type="hidden" name="keyWord"
+																					value="${keyWord }"><br>
+																				<!-- 리플페이지번호 -->
+																				<input type="hidden" name="replyEndPage"
+																					value="${replyPage.endPage}"> <input
+																					type="hidden" name="TOKEN_KEY"
+																					value="<%=request.getAttribute("TOKEN_KEY")%>" />
+																				
+																			</div>
+																		</div>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+
+											</form>
+										</c:if>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</section>
+		</article>
+		<footer>
+			<jsp:include page="footer.jsp"></jsp:include>
+		</footer>
+	</div>
+
+
+
+</body>
+</html>

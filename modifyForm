@@ -6,7 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/NewBasic.css">
-<link rel="stylesheet" href="css/modifyReview.css">
+<!-- <link rel="stylesheet" href="css/modifyReview.css"> -->
+<link rel="stylesheet" href="css/writeReview.css?ver=1">
 
 
 <script
@@ -33,6 +34,14 @@ function modifyCheck(frm) {
 	}
 	frm.submit();
 }
+
+function chk() {
+	alert("글 수정이 취소되었습니다.");
+	history.back();
+	return false;
+}
+
+
 </script>
 <title>게시글 수정</title>
 </head>
@@ -63,7 +72,7 @@ function modifyCheck(frm) {
 							</div> --%>
 							<!-- 제목을 입력하세요 -->
 							<div class="article-subject">
-								<label for="subject">제목 기입</label>
+								<label for="subject"><img alt="" src="image/pen.png"></label> 
 								<input type="text" id="title" name="title" placeholder="제목을 입력하세요" maxlength="60" value="${modReq.title}" >
 								<c:if test="${errors.rv_title}">제목을 입력하세요.</c:if>
 							</div>
@@ -75,11 +84,8 @@ function modifyCheck(frm) {
 							</div>
 							<div class="article-info-select">
 								<div class="set-btn">
-									<button type="reset" class="round gray on" id="btn-write_cancle">
-										<span>취소</span>
-									</button>
-									<input type="submit" class="round red on">
-										<span>등록</span>
+									<input type="button" value="수정" onclick="modifyCheck(form)" class="round red on">
+									<input type="button" value="취소" onclick="chk()" class="round gray on">
 								</div>
 							</div>
 						</div>

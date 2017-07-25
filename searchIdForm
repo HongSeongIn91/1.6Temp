@@ -1,0 +1,203 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/MainBasic.css">
+
+
+<link rel="stylesheet" href="css/eddy.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="js/slides.min.jquery.js"></script>
+
+
+<title>아이디 찾기</title>
+
+<script language="javascript">
+	function sub() {
+
+		a = document.search.email1.value;
+		b = document.search.email2.value;
+		c = a + "@" + b;
+
+		document.search.email.value = c;
+		
+		
+		/* 3 칸으로 입력된 생년월일을 1 개로 연결하기 위한 함수 */
+		h = document.search.birth1.value;
+		i = document.search.birth2.value;
+		j = document.search.birth3.value;
+	
+		k = h + i + j;
+		
+		document.search.birth.value = k;
+
+		return true;
+	}
+</script>
+
+<style>
+
+/* NewBasic.css */
+
+/* end NewBasic.css */
+
+/*  폭이 좁아 더 크게 함  */
+.form-container {   
+	width: 550px; 
+	margin-top: 80px;
+	} 
+
+</style>
+
+</head>
+<body>
+	<div id="wrapper">
+		<header>
+			<jsp:include page="header.jsp"></jsp:include>
+		</header>
+		<section>
+		<article>
+			
+
+
+				<form action="searchId.do" name="search" method="post" onsubmit="sub()" class="form-container">
+<fieldset>
+			<legend><strong>아이디 찾기</strong></legend>
+			<br><span class="form-field"><strong>가입 시 입력하셨던 생년월일과 이메일을 입력해 주세요.</strong></span>
+			<ul>
+
+	                <li>
+					<label for="eddy-birth" >생년월일 *</label>
+					<input type="hidden" id="eddy-birth" name="birth"   /> 
+					<input type="text" name="birth1" class="form-birth1"
+							placeholder="예) 1997년생 > 1997"  maxlength="4" pattern="\d{4}"/> 
+						<select name="birth2" class="form-birth2">
+								<option value=01>1월</option>
+								<option value=02>2월</option>
+								<option value=03>3월</option>
+								<option value=04>4월</option>
+								<option value=05>5월</option>
+								<option value=06>6월</option>
+								<option value=07>7월</option>
+								<option value=08>8월</option>
+								<option value=09>9월</option>
+								<option value=10>10월</option>
+								<option value=11>11월</option>
+								<option value=12>12월</option>
+						</select> 
+						<select name="birth3" class="form-birth3">
+								<option value=01>1일</option>
+								<option value=02>2일</option>
+								<option value=03>3일</option>
+								<option value=04>4일</option>
+								<option value=05>5일</option>
+								<option value=06>6일</option>
+								<option value=07>7일</option>
+								<option value=08>8일</option>
+								<option value=09>9일</option>
+								<option value=10>10일</option>
+								<option value=11>11일</option>
+								<option value=12>12일</option>
+								<option value=13>13일</option>
+								<option value=14>14일</option>
+								<option value=15>15일</option>
+								<option value=16>16일</option>
+								<option value=17>17일</option>
+								<option value=18>18일</option>
+								<option value=19>19일</option>
+								<option value=20>20일</option>
+								<option value=21>21일</option>
+								<option value=22>22일</option>
+								<option value=23>23일</option>
+								<option value=24>24일</option>
+								<option value=25>25일</option>
+								<option value=26>26일</option>
+								<option value=27>27일</option>
+								<option value=28>28일</option>
+								<option value=29>29일</option>
+								<option value=30>30일</option>
+								<option value=31>31일</option>
+						</select>
+						<c:if test="${errors.email}"> 이메일 입력하세요.</c:if>
+						<br><c:if test="${errors.birthOrEmailNotMatch}">입력하신 정보가 일치하지 않습니다.
+				 	     </c:if>
+					</li>		
+							
+					<li>
+					<label for="eddy-email" >이메일 *</label>
+					<p>
+						<input type="hidden" id="eddy-email" name="email" /> 
+						
+						<input type="text" name="email1" id="str_email01"  maxlength="20" class="form-email1"/>
+						<span>@</span>
+						<input type="text" name="email2" id="str_email02" disabled value="gmail.com" class="form-email2"/> 
+							<select name="selectEmail" id="selectEmail" class="form-email3" >
+							<option value="1">직접입력</option>
+							<option value="gmail.com" selected>gamil.com</option>
+							<option value="naver.com">naver.com</option>
+							<option value="hanmail.net">hanmail.net</option>
+							<option value="nate.com">nate.com</option>
+						</select>
+						<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+						<script type="text/javascript">
+							$('#selectEmail')
+									.change(
+											function() {
+												$(
+														"#selectEmail option:selected")
+														.each(
+																function() {
+
+																	if ($(this)
+																			.val() == '1') {
+																		$(
+																				"#str_email02")
+																				.val(
+																						'');
+																		$(
+																				"#str_email02")
+																				.attr(
+																						"disabled",
+																						false);
+																	} else {
+																		$(
+																				"#str_email02")
+																				.val(
+																						$(
+																								this)
+																								.text());
+																		$(
+																				"#str_email02")
+																				.attr(
+																						"disabled",
+																						true);
+																	}
+																});
+											});
+						</script>
+						<c:if test="${errors.email}"> 이메일 입력하세요.</c:if>
+					</p>
+				</li>
+				</ul>
+		 </fieldset>
+				
+					<div class="submit-container"> 
+					<input type="submit" value="확인" class="submit-button">
+					</div>	
+					
+		</form>			
+			
+		</article>
+
+		<footer>
+			<jsp:include page="footer.jsp"></jsp:include>
+		</footer>
+		</section>
+	</div>
+</body>
+</html>

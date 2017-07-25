@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/Basic_myPage.css?ver=1">
-<link rel="stylesheet" href="css/ListMyReply.css?ver=2.2">
+<link rel="stylesheet" href="css/ListMyReply.css?ver=3.4">
 
 
 <script
@@ -49,6 +49,7 @@
 			</ul>
 		</sidebar>
 		<article>
+			<h1>내 댓글</h1>
 			<!-- <section> -->
 
 	
@@ -56,10 +57,14 @@
 				
 				<thead>
 					<tr>
-						<th width="70px">무비로그번호</th>
-						<th width="250px">무비로그제목</th>
-						<th width="600px">내용</th>
-						<th	width="30px">작성일</th>
+						<th width="50px">번호</th>
+						<th width="250px">제목</th>
+						<th width="500px">내용</th>
+						<th	width="60px">작성일</th>
+						<!-- <th width="60px">번호</th>
+						<th>무비로그제목</th>
+						<th>내용</th>
+						<th>작성일</th> -->
 
 					</tr>
 				</thead>

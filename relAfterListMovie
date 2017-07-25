@@ -23,7 +23,7 @@
 			<article>
 
 				<div class="movielist">
-				<%-- 	<h1>${ movietop}</h1> --%>
+					<%-- <h1>${ movietop}</h1> --%>
 				</div>
 				<div class="minilist">
 					<a href="movielist.do">[영화목록]</a> 

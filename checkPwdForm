@@ -29,7 +29,7 @@
 						비밀번호:<br />
 						<input type="password" name="m_pw">
 						<c:if test="${errors.m_pw}"> 비밀번호를 입력하세요.</c:if>
-						<%-- <c:if test="${errors.?}"> 잘못된 비밀번호입니다.</c:if> --%>
+						<c:if test="${errors.badCurPwd}"> 잘못된 비밀번호입니다.</c:if>
 					</p>
 
 

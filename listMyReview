@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/Basic_myPage.css">
-<link rel="stylesheet" href="css/ListMyReview.css?ver=1">
+<link rel="stylesheet" href="css/ListMyReview.css?ver=1.3">
 
 
 <script
@@ -49,14 +49,15 @@
 			</ul>
 		</sidebar>
 		<article>
+			<h1>내 무비로그</h1>
 			<table border="0" class="listMyReview_table">
 				<thead>
 				<tr>
-					<th width="50px">리뷰글번호</th>
-					<th	width="110px">영화제목</th>
+					<th width="50px">번호</th>
+					<th	width="180px">영화</th>
 					<th width="590px">제목</th>
 					<th width="90px">작성일</th>
-					<th>조회</th>
+					<th style="text-align:center">조회</th>
 				</tr>
 				</thead>
 				

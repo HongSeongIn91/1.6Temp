@@ -20,8 +20,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/MainBasic.css">
-<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/MainBasic.css?ver=1">
+<link rel="stylesheet" href="css/global.css?ver=1.1">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
@@ -164,35 +164,67 @@
 					<div id="slides">
 						<div class="slides_container">
 							<div class="slide" style="float: left; margin: 0; padding: 0">
-								<a href="movieread.do?mv_num=9"><img src="image/movieposter/1.jpg" class="poster-first" alt="Slide 1"></a>
-								<a href="movieread.do?mv_num=9"><img src="image/movieposter/2.jpg" class="poster-second" alt="Slide 1"></a> 
-								<a href="movieread.do?mv_num=9"><img src="image/movieposter/3.jpg" class="poster-third" alt="Slide 1"></a>
+								<a href="movieread.do?mv_num=1"><img src="image/movieposter/1.jpg" class="poster-first" alt="Slide 1"></a>
+								<a href="movieread.do?mv_num=2"><img src="image/movieposter/2.jpg" class="poster-second" alt="Slide 1"></a> 
+								<a href="movieread.do?mv_num=3"><img src="image/movieposter/3.jpg" class="poster-third" alt="Slide 1"></a>
 							</div>
 
 							<div class="slide" style="float: left; margin: 0; padding: 0">
-								<a href="movieread.do?mv_num=11"><img src="image/movieposter/4.jpg" class="poster-first" alt="Slide 2"></a>
-								<a href="movieread.do?mv_num=11"><img src="image/movieposter/5.jpg" class="poster-second" alt="Slide 2"></a> 
-								<a href="movieread.do?mv_num=11"><img src="image/movieposter/6.jpg" class="poster-third" alt="Slide 2"></a>
+								<a href="movieread.do?mv_num=4"><img src="image/movieposter/4.jpg" class="poster-first" alt="Slide 2"></a>
+								<a href="movieread.do?mv_num=5"><img src="image/movieposter/5.jpg" class="poster-second" alt="Slide 2"></a> 
+								<a href="movieread.do?mv_num=6"><img src="image/movieposter/6.jpg" class="poster-third" alt="Slide 2"></a>
 
 
 							</div>
 							<div class="slide" style="float: left; margin: 0; padding: 0">
-								<a href="movieread.do?mv_num=6"><img src="image/movieposter/7.jpg" class="poster-first" alt="Slide 3"></a>
-									 <a href="movieread.do?mv_num=6"><img src="image/movieposter/8.jpg" class="poster-second" alt="Slide 3"></a>
-									  <a href="movieread.do?mv_num=6"><img src="image/movieposter/9.jpg" class="poster-third" alt="Slide 3"></a>
+								<a href="movieread.do?mv_num=7"><img src="image/movieposter/7.jpg" class="poster-first" alt="Slide 3"></a>
+									 <a href="movieread.do?mv_num=8"><img src="image/movieposter/8.jpg" class="poster-second" alt="Slide 3"></a>
+									  <a href="movieread.do?mv_num=9"><img src="image/movieposter/9.jpg" class="poster-third" alt="Slide 3"></a>
 							</div>
 
 							<div class="slide" style="float: left; margin: 0; padding: 0">
-								<a href="movieread.do?mv_num=1"><img src="image/movieposter/10.jpg" class="poster-first" alt="Slide 4"></a>
-								 <a href="movieread.do?mv_num=1"><img src="image/movieposter/11.jpg" class="poster-second" alt="Slide 4"></a> 
-								 <a href="movieread.do?mv_num=1"><img src="image/movieposter/12.jpg" class="poster-third" alt="Slide 4"></a>
+								<a href="movieread.do?mv_num=10"><img src="image/movieposter/10.jpg" class="poster-first" alt="Slide 4"></a>
+								 <a href="movieread.do?mv_num=11"><img src="image/movieposter/11.jpg" class="poster-second" alt="Slide 4"></a> 
+								 <a href="movieread.do?mv_num=12"><img src="image/movieposter/12.jpg" class="poster-third" alt="Slide 4"></a>
 							</div>
+							
+							<div class="slide" style="float: left; margin: 0; padding: 0">
+								<a href="movieread.do?mv_num=13"><img src="image/movieposter/13.jpg" class="poster-first" alt="Slide 5"></a>
+								 <a href="movieread.do?mv_num=14"><img src="image/movieposter/14.jpg" class="poster-second" alt="Slide 5"></a> 
+								 <a href="movieread.do?mv_num=15"><img src="image/movieposter/15.jpg" class="poster-third" alt="Slide 5"></a>
+							</div>
+							
+							<div class="slide" style="float: left; margin: 0; padding: 0">
+								<a href="movieread.do?mv_num=16"><img src="image/movieposter/16.jpg" class="poster-first" alt="Slide 6"></a>
+								 <a href="movieread.do?mv_num=17"><img src="image/movieposter/17.jpg" class="poster-second" alt="Slide 6"></a> 
+								 <a href="movieread.do?mv_num=18"><img src="image/movieposter/18.jpg" class="poster-third" alt="Slide 6"></a>
+							</div>
+							
+							<div class="slide" style="float: left; margin: 0; padding: 0">
+								<a href="movieread.do?mv_num=19"><img src="image/movieposter/19.jpg" class="poster-first" alt="Slide 7"></a>
+								 <a href="movieread.do?mv_num=20"><img src="image/movieposter/20.jpg" class="poster-second" alt="Slide 7"></a> 
+								 <a href="movieread.do?mv_num=21"><img src="image/movieposter/21.jpg" class="poster-third" alt="Slide 7"></a>
+							</div>
+							
+							<div class="slide" style="float: left; margin: 0; padding: 0">
+								<a href="movieread.do?mv_num=22"><img src="image/movieposter/22.jpg" class="poster-first" alt="Slide 8"></a>
+								 <a href="movieread.do?mv_num=23"><img src="image/movieposter/23.jpg" class="poster-second" alt="Slide 8"></a> 
+								 <a href="movieread.do?mv_num=24"><img src="image/movieposter/24.jpg" class="poster-third" alt="Slide 8"></a>
+							</div>
+							
+							<div class="slide" style="float: left; margin: 0; padding: 0">
+								<a href="movieread.do?mv_num=25"><img src="image/movieposter/25.jpg" class="poster-first" alt="Slide 9"></a>
+								 <a href="movieread.do?mv_num=26"><img src="image/movieposter/26.jpg" class="poster-second" alt="Slide 9"></a> 
+								 <a href="movieread.do?mv_num=27"><img src="image/movieposter/27.jpg" class="poster-third" alt="Slide 9"></a>
+							</div>
+							
+							
 
 
 						</div>
-						<a href="#" class="prev"><img src="image/arrow3.png"
+						<a href="#" class="prev"><img src="image/arrow5.png"
 							width="24" height="43" alt="Arrow Prev"></a> <a href="#"
-							class="next"><img src="image/arrow4.png" width="24"
+							class="next"><img src="image/arrow6.png" width="24"
 							height="43" alt="Arrow Next"></a>
 					</div>
 				</div>
